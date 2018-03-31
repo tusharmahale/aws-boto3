@@ -6,6 +6,8 @@ session = boto3.Session(profile_name='admin')
 rs_ec2 = session.resource('ec2')
 cl_ec2 = session.client('ec2')
 
+# Get desired details for EC2 volume e.g. subnet,Volume
+
 VPC_ID = jp.search('Vpcs[].VpcId',cl_ec2.describe_vpcs())[0]
 SUBNET_ID = jp.search('Subnets[?Tags[? Value == `PublicSubnetJenkins`]].SubnetId',cl_ec2.describe_subnets())[0]
 SG_ID = jp.search('SecurityGroups[?GroupName == `JenkinsSG`].GroupId',cl_ec2.describe_security_groups())[0]
